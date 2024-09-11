@@ -1,0 +1,74 @@
+﻿@model List<Feature>
+
+@foreach(var item in Model){
+    <section id="feature" class="feature" style="overflow: hidden;">
+        <img src="@item.Image" alt="Background Image" style="
+        background-position: top;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;">
+        <div class="container pt-4" style="margin: 0 7%;" id="home">
+            <div class="row align-items-center">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <select id="category-select" class="form-select w-100" style="height: 45px;">
+                        <option value="">SELECT A CATEGORY</option>
+                        <option value="*">All</option>
+                        <option value="art">Art</option>
+                        <option value="biography">Biography</option>
+                        <option value="classics">Classics</option>
+                        <option value="comics">Comics</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="history">History</option>
+                        <option value="horror">Horror</option>
+                        <option value="poetry">Poetry</option>
+                        <option value="psychology">Psychology</option>
+                        <option value="romance">Romance</option>
+                        <option value="science-fiction">Science Fiction</option>
+                    </select>
+                </div>
+
+                <div class="col-md-8 d-flex">
+                    <input id="searchBox" class="form-control search-box me-2" type="search" placeholder="Search" aria-label="Search"
+                           style="height: 45px;">
+                    <button id="searchBtn" class="btn btn-outline-success search-btn" type="submit"
+                            style="height: 45px; width: 150px;">
+                        Search
+                    </button>
+                </div>
+                <div id="searchResults" class="col-md-12 mt-3"></div>
+            </div>
+
+            <div id="carouselExampleIndicators" class="vh-100 carousel slide mt-4" data-bs-ride="carousel">
+
+                <div class="text-center carousel-item active">
+                    <h2 class="text-capitalize text-white">best collection</h2>
+                    <h1 class="text-uppercase py-2 fw-bold text-white">new arrivals</h1>
+                    <a href="/Book" class="btn mt-3 text-uppercase">shop now</a>
+                </div>
+                <div class="text-center carousel-item">
+                    <h2 class="text-capitalize text-white">best price & offer</h2>
+                    <h1 class="text-uppercase py-2 fw-bold text-white">new seasons</h1>
+                    <a href="/Book" class="btn mt-3 text-uppercase">buy now</a>
+                </div>
+
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+        </div>
+    </div>
+    </section>
+}

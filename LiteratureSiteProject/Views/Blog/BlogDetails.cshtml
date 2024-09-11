@@ -1,0 +1,44 @@
+﻿@model EntityLayer.Concrete.Blog
+@{
+    ViewData["Title"] = "BlogDetails";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<body>
+    <section id="page" class="pt-5 pb-2 text-center page">
+        <div class="container">
+            <div class="title text-center mb-4">
+                <h2 class="">@Model.Name</h2>
+            </div>
+            <div class="row gy-lg-5 align-items-center">
+                <div class="col-lg-6 order-lg-0">
+                    <img src="@Model.Image" alt="" class="img-fluid">
+                </div>
+                <div class="col-lg-6 order-lg-1 text-center text-lg-start">
+                    <p class="lead text-muted">@Model.Description</p>
+                </div>
+            </div>
+            <div class="container text-center text-lg-start mt-4">
+                <p class="">
+                    @Model.Content
+                </p>
+                <small class="text-muted">By @Model.Author</small>
+                <br>
+                <small class="text-muted">@Model.Date</small>
+            </div>
+        </div>
+    </section>
+
+    <section class="comment">
+        <div class="container my-5">
+            
+            @await Component.InvokeAsync("_CommentList", new {id=ViewBag.i})
+
+            <!-- Leave a Reply Form -->
+            @await Html.PartialAsync("~/Views/Comment/AddComment.cshtml")
+
+        </div>
+
+    </section>
+</body>
+

@@ -1,0 +1,207 @@
+﻿<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script src="~/literatureSiteProject/js/script.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/js/bootstrap-select.min.js"></script>
+
+
+    <script src="~/literatureSiteProject/jquery/dist/jquery.min.js"></script>
+    <script src="~/literatureSiteProject/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+
+
+    //kalpleme
+    document.addEventListener('DOMContentLoaded', function () {
+        // Tüm kalp simgelerini seç
+        const heartIcons = document.querySelectorAll('.heart-icon');
+
+        heartIcons.forEach(heartIcon => {
+            heartIcon.addEventListener('click', function() {
+                var icon = this.querySelector('i');
+                // Toggle color between red and original
+                if (icon.style.color === 'red') {
+                    icon.style.color = ''; // Remove color
+                } else {
+                    icon.style.color = 'red'; // Set color to red
+                }
+            });
+        });
+    });
+
+
+
+
+    //rating verme
+    document.addEventListener('DOMContentLoaded', function () {
+        // Tüm kitap kartlarını seç
+        const cardShops = document.querySelectorAll('.card-shop');
+
+        // Her bir kitap kartını işleme
+        cardShops.forEach(cardShop => {
+            const stars = cardShop.querySelectorAll('.star');
+
+            stars.forEach((star, index) => {
+                star.addEventListener('click', () => {
+                    // Tüm yıldızların selected sınıfını kaldır
+                    stars.forEach(s => s.classList.remove('selected'));
+
+                    // Tıklanan yıldız ve öncekilerin sınıfını ekle
+                    for (let i = 0; i <= index; i++) {
+                        stars[i].classList.add('selected');
+                    }
+                });
+            });
+        });
+    });
+
+
+    $(document).ready(function(){
+        $('.book-slider__container').owlCarousel({
+            loop:true,
+            margin:10,
+            nav:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },
+                1000:{
+                    items:3
+                }
+            }
+        });
+      });
+
+
+    //   slider index
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Carousel ayarları
+        const sliders = ['bestSellers', 'newReleases', 'genres'];
+
+        sliders.forEach(id => {
+            const slider = document.getElementById(id);
+
+            if (slider) {
+                const carousel = new bootstrap.Carousel(slider, {
+                    interval: 5000,
+                    ride: 'carousel'
+                });
+            }
+        });
+    });
+
+
+    //  slider index end
+
+
+
+
+
+
+
+    /// filter start
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get the filter value from the query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    let filter = urlParams.get('filter');
+
+    // Default to '*' if no filter is set
+    if (!filter) {
+        filter = '*'; // Assuming '*' is the 'All' filter
+    }
+
+    // Function to filter items based on the filter value
+    function filterItems(filter) {
+        const items = document.querySelectorAll('.collection-list .col-12');
+        items.forEach(item => {
+            if (filter === '*' || item.classList.contains(filter)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Handle the filter buttons' state
+    const filterButtons = document.querySelectorAll('.filter-button-group button');
+    filterButtons.forEach(button => {
+        button.classList.remove('active-filter-btn');
+        if (filter === '*' && button.getAttribute('data-filter') === '*') {
+            // Activate only the 'All' button
+            button.classList.add('active-filter-btn');
+        } else if (button.getAttribute('data-filter') === `.${filter}`) {
+            // Activate the corresponding category button
+            button.classList.add('active-filter-btn');
+        }
+    });
+
+    // Initial filter items based on the URL filter value
+    filterItems(filter);
+
+    // Handle the filter buttons click event
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Update the active button state
+            filterButtons.forEach(btn => btn.classList.remove('active-filter-btn'));
+            this.classList.add('active-filter-btn');
+
+            // Get the selected filter from the button
+            const selectedFilter = this.getAttribute('data-filter').slice(1); // Remove the '.' from filter class
+
+            // Update the URL with the new filter value
+            const newUrl = new URL(window.location.href);
+            newUrl.searchParams.set('filter', selectedFilter);
+            window.history.pushState({}, '', newUrl);
+
+            // Filter the items based on the selected filter
+            filterItems(selectedFilter);
+        });
+    });
+
+    // Handle dropdown selection for filtering
+    const categorySelect = document.getElementById('category-select');
+    if (categorySelect) {
+        categorySelect.addEventListener('change', function() {
+            const selectedCategory = this.value;
+
+            // Update the filter buttons' state based on the dropdown selection
+            filterButtons.forEach(button => {
+                button.classList.remove('active-filter-btn');
+                if (selectedCategory === '*' && button.getAttribute('data-filter') === '*') {
+                    button.classList.add('active-filter-btn');
+                } else if (button.getAttribute('data-filter') === `.${selectedCategory}`) {
+                    button.classList.add('active-filter-btn');
+                }
+            });
+
+            // Redirect to the Book page with the selected category filter
+            window.location.href = `/Book?filter=${encodeURIComponent(selectedCategory)}`;
+        });
+
+        // Ensure the initial state of the dropdown matches the URL filter
+        categorySelect.value = filter === '*' ? '' : filter; // Match dropdown with the URL filter
+    }
+});
+
+
+
+
+
+
+
+    </script>

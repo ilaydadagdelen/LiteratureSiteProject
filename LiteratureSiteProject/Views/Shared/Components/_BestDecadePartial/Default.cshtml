@@ -1,0 +1,31 @@
+﻿@using EntityLayer.Concrete
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model List<Blog>
+
+<section class="pt-2 text-center tbotd" id="tbotd">
+    <div class="container">
+        <h2 class="font-weight-bold mt-1">The Best Of The Decade</h2>
+        <hr class="bracket">
+        <i class="fa-solid fa-book book-icon"></i>
+        <div class="row row-cols-1 row-cols-md-2 g-5">
+            @foreach(var item in Model)
+            {
+                 <div class="col">
+                    <div class="card tbotd-card">
+                        <a href="/Blog/BlogDetails?id=@item.BlogID">
+                            <img src="@item.Image" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">
+                                @item.Description
+                            </p>
+                            <small class="text-muted">by @item.Author &emsp;&emsp;&emsp; @item.Date</small>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </div>
+</section>

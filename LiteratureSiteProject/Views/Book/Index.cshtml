@@ -1,0 +1,77 @@
+﻿@model List<Book>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+
+<body>
+    <main>
+        <section id="collection" class="py-5">
+            <div class="container">
+                <div class="title text-center mb-4">
+                    <h2 class="position-relative d-inline-block">Genres</h2>
+                </div>
+
+                <div class="row g-0 mb-4 justify-content-center">
+                    <div class="d-flex flex-wrap justify-content-center filter-button-group">
+                        <button type="button" class="btn m-2 btn-primary active-filter-btn" data-filter=".*">All</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".art">Art</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".biography">Biography</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".classics">Classics</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".comics">Comics</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".fantasy">Fantasy</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".fiction">Fiction</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".history">History</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".horror">Horror</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".poetry">Poetry</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".psychology">Psychology</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".romance">Romance</button>
+                        <button type="button" class="btn m-2 btn-outline-primary" data-filter=".science-fiction">Science Fiction</button>
+                    </div>
+                </div>
+
+
+
+                <div class="collection-list row gx-3 gy-4 mt-4">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 @item.Genre">
+                            <div class="card-shop">
+                                <div class="special-img position-relative">
+                                    <a href="/Book/BookDetails?id=@item.BookID"><img src="@item.Image" class="card-img-top-shop" alt="Book"></a>
+                                    <span class="position-absolute d-flex align-items-center justify-content-center fs-6 heart-icon">
+                                        <i class="fas fa-heart"></i>
+                                    </span>
+                                </div>
+                                <div class="card-body-shop text-center">
+                                    <div class="rating mb-2">
+                                        <span class="star"><i class="fas fa-star"></i></span>
+                                        <span class="star"><i class="fas fa-star"></i></span>
+                                        <span class="star"><i class="fas fa-star"></i></span>
+                                        <span class="star"><i class="fas fa-star"></i></span>
+                                        <span class="star"><i class="fas fa-star"></i></span>
+                                    </div>
+                                    <p class="card-title text-capitalize">@item.Name</p>
+                                    <small class="text-muted">@item.Author</small>
+                                    <br />
+                                    <span class="fw-bold">$@item.Price</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+    </main>
+
+
+</body>

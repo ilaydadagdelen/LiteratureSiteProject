@@ -1,0 +1,98 @@
+﻿@model EntityLayer.Concrete.Book
+@{
+    ViewData["Title"] = "BookDetails";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<body>
+
+    <section id="book" class="book">
+        <div class="container">
+            <div class="row py-5 g-5">
+                <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center flex-column posiiton-relative">
+
+                    <img src="@Model.Image" alt="" class="m-1 w-50 sliderMainImage"
+                         data-bs-toggle="modal" data-bs-target="#imageModal">
+
+                    <span class="position-absolute heart-icon" style="top: 10rem; right: 50rem; font-size: 24px;">
+                        <i class="fas fa-heart"></i>
+                    </span>
+                    <span class="pt-2">Rate this book</span>
+
+                    <div class="card-shop rating mb-2">
+                        <span class="star"><i class="fas fa-star"></i></span>
+                        <span class="star"><i class="fas fa-star"></i></span>
+                        <span class="star"><i class="fas fa-star"></i></span>
+                        <span class="star"><i class="fas fa-star"></i></span>
+                        <span class="star"><i class="fas fa-star"></i></span>
+                    </div>
+
+                </div>
+
+               
+                <div class="col-12 col-lg-6">
+                    <h2 id="bookName">@Model.Name <br /> <small class="text-muted">@Model.Author</small></h2>
+                    <small class="text-muted">@Model.Rating ratings | @Model.Review reviews | Genre: <span class="text-uppercase-first-letter">@Model.Genre</span></small>
+                    <h4 class="my-4">$<span id="price">@Model.Price</span></h4>
+                    @if (Model.Category == "best-sellers")
+                    {
+                        <p>This book is a best seller!</p>
+                    }
+                    else if (Model.Category == "new-releases"){
+                        <p>This book is new release!</p>
+                    }
+                    <div class="d-grid my-4">
+                        <button class="btn btn-lg btn-dark" type="button" id="cartBtn">Add to Cart</button>
+                    </div>
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <strong>Description</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                                <div class="accordion-body">
+                                    @Model.Description
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <strong>
+                                        Details
+                                    </strong>
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                                <div class="accordion-body">
+                                    @Model.Details
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <strong>
+                                        Book Editions
+                                    </strong>
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+                                <div class="accordion-body">
+                                    @Model.Editions
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+</body>

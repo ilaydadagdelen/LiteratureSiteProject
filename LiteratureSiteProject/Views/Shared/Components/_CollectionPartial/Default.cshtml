@@ -1,0 +1,130 @@
+﻿@using EntityLayer.Concrete
+@model List<Book>
+
+
+<section class="slider container text-center py-3">
+    <h2 class="font-weight-bold m-5">Best Collections</h2>
+    <hr class="bracket">
+    <i class="fa-solid fa-book book-icon"></i>
+    <div class="row">
+        <!-- Best Seller's Slider -->
+        <div class="col-md-4">
+            <h3>Best Sellers</h3>
+            <div id="bestSellers" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    @{
+                        var bestSellers = Model.Where(b => b.Category == "best-sellers").ToList();
+                        for (int i = 0; i < bestSellers.Count; i += 3)
+                        {
+                            var items = bestSellers.Skip(i).Take(3).ToList();
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                @foreach (var book in items)
+                                {
+                                    <div class="item">
+                                        <a href="@Url.Action("BookDetails", "Book", new { id = book.BookID })">
+                                            <img src="@book.Image" alt="@book.Name" class="img-fluid">
+                                        </a>
+                                        <div class="carousel-caption">
+                                            <p class="card-title text-capitalize">@book.Name</p>
+                                            <small class="text-muted">@book.Author</small>
+                                            <br />
+                                            <span class="fw-bold">$@book.Price</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#bestSellers" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#bestSellers" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- New Releases Slider -->
+        <div class="col-md-4">
+            <h3>New Releases</h3>
+            <div id="newReleases" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    @{
+                        var newReleases = Model.Where(b => b.Category == "new-releases").ToList();
+                        for (int i = 0; i < newReleases.Count; i += 3)
+                        {
+                            var items = newReleases.Skip(i).Take(3).ToList();
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                @foreach (var book in items)
+                                {
+                                    <div class="item">
+                                        <a href="@Url.Action("BookDetails", "Book", new { id = book.BookID })">
+                                            <img src="@book.Image" alt="@book.Name" class="img-fluid">
+                                        </a>
+                                        <div class="carousel-caption">
+                                            <p class="card-title text-capitalize">@book.Name</p>
+                                            <small class="text-muted">@book.Author</small>
+                                            <br />
+                                            <span class="fw-bold">$@book.Price</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#newReleases" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#newReleases" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Genres Slider -->
+        <div class="col-md-4">
+            <h3>Genres</h3>
+            <div id="genres" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    @{
+                        var genres = Model.Where(b => b.Category == "genres").ToList();
+                        for (int i = 0; i < genres.Count; i += 3)
+                        {
+                            var items = genres.Skip(i).Take(3).ToList();
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                @foreach (var book in items)
+                                {
+                                    <div class="item">
+                                        <a href="@Url.Action("BookDetails", "Book", new { id = book.BookID })">
+                                            <img src="@book.Image" alt="@book.Name" class="img-fluid">
+                                        </a>
+                                        <div class="carousel-caption">
+                                            <p class="card-title text-capitalize">@book.Name</p>
+                                            <small class="text-muted">@book.Author</small>
+                                            <br />
+                                            <span class="fw-bold">$@book.Price</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#genres" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#genres" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

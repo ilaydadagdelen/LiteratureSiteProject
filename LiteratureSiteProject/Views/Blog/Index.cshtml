@@ -1,0 +1,38 @@
+﻿@model List<Blog>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<body>
+    <section id="blog" class="blog py-2">
+            <div class="container">
+                <div class="title text-center py-5">
+                    <h2 class="position-relative d-inline-block">Our Latest Blogs</h2>
+                </div>
+                <div class="row g-3">
+                    <!-- Blog Card -->
+                    @foreach(var item in Model)
+                    {
+                        <div class="col-md-6 col-lg-4 my-3">
+                            <div class="card border-0 h-100">
+                            <a href="/Blog/BlogDetails?id=@item.BlogID">
+                                    <img src="@item.Image" alt="Blog Image" class="card-img-top img-fluid" style="height: 200px; object-fit: cover;">
+                                </a>
+                                <div class="card-body px-0">
+                                    <h4 class="card-title">@item.Name</h4>
+                                    <p class="card-text mt-3 text-muted">@item.Description</p>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                        By <span class="fw-bold">@item.Author</span> &emsp;&emsp; @item.Date
+                                    </small>
+                                    </p>
+                                <a href="/Blog/BlogDetails?id=@item.BlogID" class="btn">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+</body>

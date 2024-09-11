@@ -1,0 +1,34 @@
+﻿@model List<About>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<body>
+    <section id="about" class="py-5 pb-5 text-center about">
+        <div class="container">
+
+            @foreach (var item in Model)
+            {
+            <div class="title pt-1">
+                <h2 class="font-weight-bold">@item.Name</h2>
+                <hr class="bracket">
+                <i class="fa-solid fa-leaf leaf-icon"></i>
+            </div>
+                <div class="row gy-lg-5 align-items-center">
+                    <div class="col-lg-6 order-lg-1 text-center text-lg-start">
+                        <p class="lead text-muted">
+                            @item.Description
+                        </p>
+                        <p>
+                            @item.Content
+                        </p>
+                    </div>
+                    <div class="col-lg-6 order-lg-0">
+                        <img src="@item.Image" alt="" class="img-fluid">
+                    </div>
+                </div>                
+            }
+        </div>
+    </section>
+</body>
