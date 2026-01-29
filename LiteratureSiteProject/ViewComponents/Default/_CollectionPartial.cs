@@ -1,16 +1,20 @@
-﻿using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+﻿using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteratureSiteProject.ViewComponents.Default
 {
     public class _CollectionPartial : ViewComponent
     {
-        BookManager bookManager = new BookManager(new EfBookDal());
+        private readonly IBookService _bookService;
+
+        public _CollectionPartial(IBookService bookService)
+        {
+            _bookService = bookService;
+        }
 
         public IViewComponentResult Invoke()
         {
-            var values = bookManager.TGetList();
+            var values = _bookService.TGetList();
             return View(values);
         }
     }

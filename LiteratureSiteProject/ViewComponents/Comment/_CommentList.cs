@@ -1,15 +1,20 @@
-﻿using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+﻿using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteratureSiteProject.ViewComponents.Comment
 {
     public class _CommentList : ViewComponent
     {
-        CommentManager commentManager = new CommentManager(new EfCommentDal());
+        private readonly ICommentService _commentService;
+
+        public _CommentList(ICommentService commentService)
+        {
+            _commentService = commentService;
+        }
+
         public IViewComponentResult Invoke(int id)
         {
-            var values = commentManager.TGetBlogByID(id);
+            var values = _commentService.TGetBlogByID(id);
             return View(values);  
         }
     }

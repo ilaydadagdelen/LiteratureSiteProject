@@ -1,5 +1,4 @@
-﻿using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,18 +6,23 @@ namespace LiteratureSiteProject.Controllers
 {
     public class BookController : Controller
     {
-        BookManager bookManager = new BookManager(new EfBookDal());
+        private readonly IBookService _bookService;
+
+        public BookController(IBookService bookService)
+        {
+            _bookService = bookService;
+        }
 
         public IActionResult Index()
         {
-            var values = bookManager.TGetList();
+            var values = _bookService.TGetList();
             return View(values);
         }
 
         [HttpGet]
         public IActionResult BookDetails(int id)
         {
-            var values = bookManager.TGetById(id);
+            var values = _bookService.TGetById(id);
             return View(values);
         }
 

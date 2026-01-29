@@ -1,16 +1,20 @@
-﻿using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+﻿using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteratureSiteProject.Controllers
 {
     public class AboutController : Controller
     {
-        AboutManager aboutManager = new AboutManager(new EfAboutDal());
+        private readonly IAboutService _aboutService;
+
+        public AboutController(IAboutService aboutService)
+        {
+            _aboutService = aboutService;
+        }
 
         public IActionResult Index()
         {
-            var values = aboutManager.TGetList();
+            var values = _aboutService.TGetList();
             return View(values);
         }
     }

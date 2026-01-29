@@ -1,5 +1,4 @@
-﻿using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +6,16 @@ namespace LiteratureSiteProject.Controllers
 {
     public class BlogController : Controller
     {
-        BlogManager blogManager = new BlogManager(new EfBlogDal());
+        private readonly IBlogService _blogService;
+
+        public BlogController(IBlogService blogService)
+        {
+            _blogService = blogService;
+        }
+
         public IActionResult Index()
         {
-            var values = blogManager.TGetList();
+            var values = _blogService.TGetList();
             return View(values);
         }
 
@@ -18,7 +23,7 @@ namespace LiteratureSiteProject.Controllers
         public IActionResult BlogDetails(int id) 
         {
             ViewBag.i = id;
-            var values = blogManager.TGetById(id);
+            var values = _blogService.TGetById(id);
             return View(values);
         }
 

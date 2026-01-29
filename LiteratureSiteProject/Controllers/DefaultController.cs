@@ -1,16 +1,20 @@
-﻿using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+﻿using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteratureSiteProject.Controllers
 {
     public class DefaultController : Controller
     {
-        FeatureManager featureManager = new FeatureManager(new EfFeatureDal());
+        private readonly IFeatureService _featureService;
+
+        public DefaultController(IFeatureService featureService)
+        {
+            _featureService = featureService;
+        }
 
         public IActionResult Index()
         {
-            var values = featureManager.TGetList();
+            var values = _featureService.TGetList();
             return View(values);
         }
     }

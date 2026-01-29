@@ -1,15 +1,20 @@
-﻿using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+﻿using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteratureSiteProject.ViewComponents.Default
 {
     public class _BestDecadePartial : ViewComponent
     {
-        BlogManager blogManager = new BlogManager(new EfBlogDal());
+        private readonly IBlogService _blogService;
+
+        public _BestDecadePartial(IBlogService blogService)
+        {
+            _blogService = blogService;
+        }
+
         public IViewComponentResult Invoke()
         {
-            var values = blogManager.TGetList();
+            var values = _blogService.TGetList();
             return View(values);
         }
     }

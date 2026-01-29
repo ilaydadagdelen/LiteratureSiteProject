@@ -1,15 +1,20 @@
-﻿using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+﻿using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteratureSiteProject.ViewComponents.Default
 {
     public class _FeaturePartial : ViewComponent
     {
-        FeatureManager featureManager = new FeatureManager(new EfFeatureDal());
+        private readonly IFeatureService _featureService;
+
+        public _FeaturePartial(IFeatureService featureService)
+        {
+            _featureService = featureService;
+        }
+
         public IViewComponentResult Invoke()
         {
-            var values = featureManager.TGetList();
+            var values = _featureService.TGetList();
             return View(values);
         }
     }

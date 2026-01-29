@@ -1,16 +1,20 @@
-﻿using BusinessLayer.Concrete;
-using DataAccessLayer.EntityFramework;
+﻿using BusinessLayer.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiteratureSiteProject.Controllers
 {
     public class ContactController : Controller
     {
-        ContactManager contactManager = new ContactManager(new EfContactDal());
+        private readonly IContactService _contactService;
+
+        public ContactController(IContactService contactService)
+        {
+            _contactService = contactService;
+        }
 
         public IActionResult Index()
         {
-            var values = contactManager.TGetList();
+            var values = _contactService.TGetList();
             return View(values);
         }
     }
